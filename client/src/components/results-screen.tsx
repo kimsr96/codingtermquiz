@@ -67,13 +67,13 @@ export default function ResultsScreen({
           <p className="text-gray-600 text-xl">수고하셨습니다</p>
         </div>
 
-        <div className="bg-gradient-to-r from-brand-blue to-blue-600 rounded-2xl p-8 mb-8 text-white shadow-lg">
-          <h2 className="text-2xl font-bold mb-4">최종 점수</h2>
-          <div className="text-6xl font-bold mb-3">
+        <div className="bg-white rounded-2xl p-8 mb-8 shadow-lg border-2 border-brand-blue">
+          <h2 className="text-2xl font-bold mb-4 text-gray-800">최종 점수</h2>
+          <div className="text-6xl font-bold mb-3 text-brand-blue">
             <span>{score}</span>
-            <span className="text-4xl">/{totalQuestions}</span>
+            <span className="text-4xl text-gray-600">/{totalQuestions}</span>
           </div>
-          <div className="text-blue-100 text-xl font-semibold">
+          <div className="text-brand-blue text-xl font-bold">
             {percentage}% 정답
           </div>
         </div>
