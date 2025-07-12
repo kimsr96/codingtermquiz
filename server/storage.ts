@@ -115,7 +115,7 @@ export class MemStorage implements IStorage {
 
   async createQuizSession(session: InsertQuizSession): Promise<QuizSession> {
     const id = this.sessionId++;
-    const newSession: QuizSession = { ...session, id };
+    const newSession: QuizSession = { ...session, id, completed: session.completed || false };
     this.quizSessions.set(id, newSession);
     return newSession;
   }
