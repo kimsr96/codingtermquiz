@@ -85,10 +85,10 @@ export default function ResultsScreen({
           </div>
         </div>
 
-        <div className={`mb-6 p-4 rounded-lg ${scoreMessage.bgColor}`}>
+        <div className={`mb-6 p-6 rounded-lg ${scoreMessage.bgColor}`}>
           <div className={scoreMessage.textColor}>
-            <h3 className="font-semibold mb-1">{scoreMessage.title}</h3>
-            <p className="text-sm">{scoreMessage.message}</p>
+            <h3 className="text-xl font-bold mb-2">{scoreMessage.title}</h3>
+            <p className="text-base">{scoreMessage.message}</p>
           </div>
         </div>
 

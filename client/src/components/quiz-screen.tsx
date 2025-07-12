@@ -120,8 +120,8 @@ export default function QuizScreen({
                     <CheckCircle className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-brand-green">정답입니다! 🎉</h3>
-                    <p className="text-gray-600">잘 알고 계시네요.</p>
+                    <h3 className="text-xl font-bold text-brand-green">정답입니다! 🎉</h3>
+                    <p className="text-gray-700 text-base">잘 알고 계시네요.</p>
                   </div>
                 </div>
               ) : (
@@ -130,9 +130,9 @@ export default function QuizScreen({
                     <XCircle className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-brand-red">틀렸습니다</h3>
-                    <p className="text-gray-600">
-                      정답: <span className="font-medium">
+                    <h3 className="text-xl font-bold text-brand-red">틀렸습니다</h3>
+                    <p className="text-gray-700 text-base">
+                      정답: <span className="font-semibold text-brand-green">
                         {labels[currentQuestion.correctAnswer]}. {currentQuestion.options[currentQuestion.correctAnswer]}
                       </span>
                     </p>

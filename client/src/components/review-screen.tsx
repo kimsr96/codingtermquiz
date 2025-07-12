@@ -62,13 +62,13 @@ export default function ReviewScreen({
                     <div className="flex items-center gap-3 mb-4">
                       <h3 className="text-lg font-semibold text-gray-800">{question.text}</h3>
                       {isCorrect ? (
-                        <Badge className="bg-brand-green text-white">
-                          <CheckCircle className="w-3 h-3 mr-1" />
+                        <Badge className="bg-brand-green text-white px-3 py-1 text-sm font-semibold">
+                          <CheckCircle className="w-4 h-4 mr-1" />
                           정답
                         </Badge>
                       ) : (
-                        <Badge className="bg-brand-red text-white">
-                          <XCircle className="w-3 h-3 mr-1" />
+                        <Badge className="bg-brand-red text-white px-3 py-1 text-sm font-semibold">
+                          <XCircle className="w-4 h-4 mr-1" />
                           오답
                         </Badge>
                       )}

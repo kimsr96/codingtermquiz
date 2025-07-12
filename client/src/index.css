@@ -26,9 +26,9 @@
 
   /* Custom brand colors */
   --brand-blue: hsl(213, 94%, 68%);
-  --brand-green: hsl(159, 64%, 52%);
+  --brand-green: hsl(134, 61%, 41%);
   --brand-amber: hsl(36, 91%, 49%);
-  --brand-red: hsl(0, 73%, 62%);
+  --brand-red: hsl(0, 84%, 55%);
 }
 
 .dark {
