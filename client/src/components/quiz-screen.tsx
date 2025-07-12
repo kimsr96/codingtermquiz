@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -23,16 +23,38 @@ export default function QuizScreen({
 }: QuizScreenProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
+  const [shuffledOptions, setShuffledOptions] = useState<{option: string, originalIndex: number}[]>([]);
   
   const currentQuestion = questions[currentQuestionIndex];
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
   const isLastQuestion = currentQuestionIndex === questions.length - 1;
+
+  // 선택지 순서 랜덤화
+  useEffect(() => {
+    if (currentQuestion) {
+      const optionsWithIndex = currentQuestion.options.map((option, index) => ({
+        option,
+        originalIndex: index
+      }));
+      
+      // Fisher-Yates shuffle 알고리즘
+      const shuffled = [...optionsWithIndex];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      
+      setShuffledOptions(shuffled);
+    }
+  }, [currentQuestion]);
   
-  const handleAnswerSelect = (answerIndex: number) => {
+  const handleAnswerSelect = (shuffledIndex: number) => {
     if (showFeedback) return;
     
-    setSelectedAnswer(answerIndex);
-    onSubmitAnswer(answerIndex);
+    // 실제 원본 인덱스를 찾아서 전달
+    const originalIndex = shuffledOptions[shuffledIndex].originalIndex;
+    setSelectedAnswer(originalIndex);
+    onSubmitAnswer(originalIndex);
     setShowFeedback(true);
   };
 
@@ -74,16 +96,16 @@ export default function QuizScreen({
 
           {/* Answer Options */}
           <div className="space-y-4">
-            {currentQuestion.options.map((option, index) => (
+            {shuffledOptions.map((item, shuffledIndex) => (
               <button
-                key={index}
-                onClick={() => handleAnswerSelect(index)}
+                key={shuffledIndex}
+                onClick={() => handleAnswerSelect(shuffledIndex)}
                 disabled={showFeedback}
                 className={`w-full text-left p-4 rounded-lg border-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-opacity-50 ${
                   showFeedback
-                    ? index === currentQuestion.correctAnswer
+                    ? item.originalIndex === currentQuestion.correctAnswer
                       ? 'border-brand-green bg-green-50'
-                      : index === selectedAnswer && selectedAnswer !== currentQuestion.correctAnswer
+                      : item.originalIndex === selectedAnswer && selectedAnswer !== currentQuestion.correctAnswer
                       ? 'border-brand-red bg-red-50'
                       : 'border-gray-200 bg-gray-50'
                     : 'border-transparent bg-gray-50 hover:bg-gray-100 hover:border-brand-blue'
@@ -92,16 +114,16 @@ export default function QuizScreen({
                 <div className="flex items-center">
                   <span className={`flex-shrink-0 w-8 h-8 border-2 rounded-full flex items-center justify-center font-medium mr-4 ${
                     showFeedback
-                      ? index === currentQuestion.correctAnswer
+                      ? item.originalIndex === currentQuestion.correctAnswer
                         ? 'bg-brand-green border-brand-green text-white'
-                        : index === selectedAnswer && selectedAnswer !== currentQuestion.correctAnswer
+                        : item.originalIndex === selectedAnswer && selectedAnswer !== currentQuestion.correctAnswer
                         ? 'bg-brand-red border-brand-red text-white'
                         : 'bg-white border-gray-300 text-gray-600'
                       : 'bg-white border-gray-300 text-gray-600'
                   }`}>
-                    {labels[index]}
+                    {labels[shuffledIndex]}
                   </span>
-                  <span className="text-gray-700">{option}</span>
+                  <span className="text-gray-700">{item.option}</span>
                 </div>
               </button>
             ))}
@@ -133,7 +155,9 @@ export default function QuizScreen({
                     <h3 className="text-xl font-bold text-brand-red">틀렸습니다</h3>
                     <p className="text-gray-700 text-base">
                       정답: <span className="font-semibold text-brand-green">
-                        {labels[currentQuestion.correctAnswer]}. {currentQuestion.options[currentQuestion.correctAnswer]}
+                        {shuffledOptions.find(item => item.originalIndex === currentQuestion.correctAnswer) ? 
+                          `${labels[shuffledOptions.findIndex(item => item.originalIndex === currentQuestion.correctAnswer)]}. ${currentQuestion.options[currentQuestion.correctAnswer]}` 
+                          : `${labels[currentQuestion.correctAnswer]}. ${currentQuestion.options[currentQuestion.correctAnswer]}`}
                       </span>
                     </p>
                   </div>

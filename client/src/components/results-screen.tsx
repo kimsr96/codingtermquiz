@@ -79,20 +79,20 @@ export default function ResultsScreen({
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <div className="bg-brand-green bg-opacity-20 rounded-xl p-6 border-2 border-brand-green">
+          <div className="bg-white rounded-xl p-6 border-2 border-brand-green shadow-lg">
             <div className="text-3xl font-bold text-brand-green mb-2">{score}</div>
-            <div className="text-base font-semibold text-gray-700">정답</div>
+            <div className="text-base font-semibold text-gray-800">정답</div>
           </div>
-          <div className="bg-brand-red bg-opacity-20 rounded-xl p-6 border-2 border-brand-red">
+          <div className="bg-white rounded-xl p-6 border-2 border-brand-red shadow-lg">
             <div className="text-3xl font-bold text-brand-red mb-2">{incorrectCount}</div>
-            <div className="text-base font-semibold text-gray-700">오답</div>
+            <div className="text-base font-semibold text-gray-800">오답</div>
           </div>
         </div>
 
-        <div className={`mb-8 p-8 rounded-xl border-2 ${scoreMessage.bgColor} ${scoreMessage.borderColor}`}>
-          <div className={scoreMessage.textColor}>
-            <h3 className="text-2xl font-bold mb-3">{scoreMessage.title}</h3>
-            <p className="text-lg font-medium">{scoreMessage.message}</p>
+        <div className={`mb-8 p-8 rounded-xl border-2 ${scoreMessage.bgColor} ${scoreMessage.borderColor} shadow-lg`}>
+          <div>
+            <h3 className="text-2xl font-bold mb-3 text-gray-800">{scoreMessage.title}</h3>
+            <p className="text-lg font-medium text-gray-700">{scoreMessage.message}</p>
           </div>
         </div>
 
