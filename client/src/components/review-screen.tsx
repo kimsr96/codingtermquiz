@@ -21,19 +21,19 @@ export default function ReviewScreen({
   return (
     <div className="space-y-6">
       {/* Header */}
-      <Card className="bg-white rounded-2xl shadow-lg p-6">
+      <Card className="bg-white rounded-2xl shadow-lg p-8">
         <CardContent className="pt-0">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-gray-800">답안 리뷰</h1>
-              <p className="text-gray-600 mt-1">모든 문제와 정답을 확인해보세요</p>
+              <h1 className="text-3xl font-bold text-gray-800">답안 리뷰</h1>
+              <p className="text-gray-600 mt-2 text-lg">모든 문제와 정답을 확인해보세요</p>
             </div>
             <Button
               onClick={onBackToResults}
               variant="outline"
-              className="border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white"
+              className="border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white font-bold py-3 px-6 rounded-lg text-lg"
             >
-              <ArrowLeft className="w-4 h-4 mr-2" />
+              <ArrowLeft className="w-5 h-5 mr-2" />
               결과로 돌아가기
             </Button>
           </div>
@@ -52,34 +52,34 @@ export default function ReviewScreen({
                 <div className="flex items-start gap-4">
                   {/* Question Number and Status */}
                   <div className="flex-shrink-0">
-                    <div className="w-10 h-10 rounded-full bg-brand-blue text-white flex items-center justify-center font-bold text-sm">
+                    <div className="w-12 h-12 rounded-full bg-brand-blue text-white flex items-center justify-center font-bold text-base">
                       {index + 1}
                     </div>
                   </div>
                   
                   {/* Question Content */}
                   <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-4">
-                      <h3 className="text-lg font-semibold text-gray-800">{question.text}</h3>
+                    <div className="flex items-center gap-4 mb-6">
+                      <h3 className="text-xl font-bold text-gray-800">{question.text}</h3>
                       {isCorrect ? (
-                        <Badge className="bg-brand-green text-white px-3 py-1 text-sm font-semibold">
-                          <CheckCircle className="w-4 h-4 mr-1" />
+                        <Badge className="bg-brand-green text-white px-4 py-2 text-base font-bold">
+                          <CheckCircle className="w-5 h-5 mr-2" />
                           정답
                         </Badge>
                       ) : (
-                        <Badge className="bg-brand-red text-white px-3 py-1 text-sm font-semibold">
-                          <XCircle className="w-4 h-4 mr-1" />
+                        <Badge className="bg-brand-red text-white px-4 py-2 text-base font-bold">
+                          <XCircle className="w-5 h-5 mr-2" />
                           오답
                         </Badge>
                       )}
                     </div>
 
                     {/* Answer Options */}
-                    <div className="space-y-2 mb-4">
+                    <div className="space-y-3 mb-6">
                       {question.options.map((option, optionIndex) => (
                         <div
                           key={optionIndex}
-                          className={`p-3 rounded-lg border-2 flex items-center ${
+                          className={`p-4 rounded-lg border-2 flex items-center ${
                             optionIndex === question.correctAnswer
                               ? 'border-brand-green bg-green-50'
                               : userAnswer && optionIndex === userAnswer.selectedAnswer && !isCorrect
@@ -87,7 +87,7 @@ export default function ReviewScreen({
                               : 'border-gray-200 bg-gray-50'
                           }`}
                         >
-                          <span className={`w-6 h-6 rounded-full flex items-center justify-center text-sm font-medium mr-3 ${
+                          <span className={`w-8 h-8 rounded-full flex items-center justify-center text-base font-bold mr-4 ${
                             optionIndex === question.correctAnswer
                               ? 'bg-brand-green text-white'
                               : userAnswer && optionIndex === userAnswer.selectedAnswer && !isCorrect
@@ -96,23 +96,23 @@ export default function ReviewScreen({
                           }`}>
                             {labels[optionIndex]}
                           </span>
-                          <span className="text-gray-800">{option}</span>
+                          <span className="text-gray-800 text-base font-medium">{option}</span>
                           {optionIndex === question.correctAnswer && (
-                            <CheckCircle className="w-4 h-4 text-brand-green ml-auto" />
+                            <CheckCircle className="w-5 h-5 text-brand-green ml-auto" />
                           )}
                           {userAnswer && optionIndex === userAnswer.selectedAnswer && !isCorrect && (
-                            <XCircle className="w-4 h-4 text-brand-red ml-auto" />
+                            <XCircle className="w-5 h-5 text-brand-red ml-auto" />
                           )}
                         </div>
                       ))}
                     </div>
 
                     {/* Explanation */}
-                    <div className="bg-blue-50 rounded-lg p-4 border-l-4 border-brand-blue">
-                      <h4 className="font-semibold text-gray-700 mb-2 flex items-center">
+                    <div className="bg-blue-50 rounded-lg p-6 border-l-4 border-brand-blue">
+                      <h4 className="font-bold text-gray-700 mb-3 flex items-center text-lg">
                         💡 설명
                       </h4>
-                      <p className="text-gray-600 text-sm leading-relaxed">
+                      <p className="text-gray-600 text-base leading-relaxed">
                         {question.explanation}
                       </p>
                     </div>
