@@ -1,4 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+export const runtime = 'edge';
 
 const questions = [
   {
@@ -21,9 +21,9 @@ const questions = [
   },
 ];
 
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  res.status(200).json(questions);
+export default function handler(req: Request) {
+  return new Response(JSON.stringify(questions), {
+    status: 200,
+    headers: { 'Content-Type': 'application/json' },
+  });
 } 
